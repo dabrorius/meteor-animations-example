@@ -9,7 +9,10 @@
 
   <ul>
     {{#each pizzas}}
-      <li>{{name}}</li>
+      <li>
+        <h2>{{name}}</h2>
+        <button class="remove-pizza">Remove</button>
+      </li>
     {{/each}}
   </ul>
 </body>

@@ -11,6 +11,9 @@ if (Meteor.isClient) {
   Template.body.events({
     'click #add-pizza': function () {
       Pizzas.insert({ name: "Pizza" });
+    },
+    'click .remove-pizza': function () {
+      Pizzas.remove({ _id: this._id });
     }
   });
 }
