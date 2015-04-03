@@ -24,16 +24,11 @@ if (Meteor.isClient) {
     Meteor.defer(function(){
       document.getElementById("pizza-list")._uihooks = {
         insertElement: function(node, next) {
-          $(node).addClass('animated zoomInUp').insertBefore(next)
-            .on(ANIMATION_END, function() {
-              $(node).removeClass('animated zoomInUp')
-            });
+          $(node).addClass('animated zoomInUp').insertBefore(next);
         },
         removeElement: function(node) {
-          $(node).addClass('animated fadeOutRight')
-            .on(ANIMATION_END, function() {
-              $(node).remove()
-            });
+          $(node).removeClass().addClass('animated fadeOutRight')
+            .on(ANIMATION_END, function() { $(node).remove() });
         }
       }
     });
