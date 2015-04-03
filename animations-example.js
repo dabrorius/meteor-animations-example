@@ -1,3 +1,5 @@
+ANIMATION_END = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+
 Pizzas = new Mongo.Collection("pizzas");
 
 if (Meteor.isClient) {
@@ -16,5 +18,26 @@ if (Meteor.isClient) {
       Pizzas.remove({ _id: this._id });
     }
   });
+
+  Template.body.rendered = function() {
+    var $this = this;
+    Meteor.defer(function(){
+      document.getElementById("pizza-list")._uihooks = {
+        insertElement: function(node, next) {
+          $(node).addClass('animated zoomInUp').insertBefore(next)
+            .on(ANIMATION_END, function() {
+              $(node).removeClass('animated zoomInUp')
+            });
+        },
+        removeElement: function(node) {
+          $(node).addClass('animated fadeOutRight')
+            .on(ANIMATION_END, function() {
+              $(node).remove()
+            });
+        }
+      }
+    });
+  }
+
 }
 
